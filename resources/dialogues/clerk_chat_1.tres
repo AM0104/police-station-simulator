@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Elena Morozova"
+text = "Coffee's cold again. The Chief takes his black, and he takes it before eight."
+speaker_ru = "Елена Морозова"
+text_ru = "Кофе опять остыл. Начальник пьёт чёрный, и пьёт его до восьми."

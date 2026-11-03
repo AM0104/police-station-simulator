@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Detective Vlasov"
+text = "That folder is a prop. The real Kravtsov report is in my locker in the break room. Take it to the Chief's office — or hand over the folder and keep your mouth shut. Your choice."
+speaker_ru = "Детектив Власов"
+text_ru = "Эта папка — пустышка. Настоящий отчёт Кравцова лежит в моём шкафчике в комнате отдыха. Отнеси его в кабинет начальника — или сдай папки и держи рот на замке. Выбирай."
+event_name = "start_investigation"
+event_payload = "kravtsov_tip"

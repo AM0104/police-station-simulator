@@ -1,0 +1,12 @@
+; Thin, cold rain streaks. Unshaded so they glow faintly against the night.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+shading_mode = 0
+transparency = 1
+albedo_color = Color(0.48, 0.72, 0.77, 0.65)
+emission_enabled = true
+emission = Color(0.36, 0.64, 0.7, 1)
+emission_energy_multiplier = 1.5
+roughness = 0.2
+metallic = 0.0

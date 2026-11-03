@@ -1,0 +1,7 @@
+; Aged desk top and paper stacks.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.205, 0.14, 0.082, 1)
+roughness = 0.7
+metallic = 0.08

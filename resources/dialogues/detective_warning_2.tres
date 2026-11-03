@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+[ext_resource type="Resource" path="res://resources/dialogues/detective_warning_3.tres" id="2_next"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Detective Vlasov"
+text = "Forget it. The Kravtsov file is not your business. Deliver your paper, keep your mouth shut, and we'll get along."
+speaker_ru = "Детектив Власов"
+text_ru = "Забудь. Дело Кравцова — не твоё дело. Отнеси бумаги, держи рот на замке, и мы поладим."
+next_line = ExtResource("2_next")

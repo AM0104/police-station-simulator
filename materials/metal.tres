@@ -1,0 +1,7 @@
+; Blackened steel: lamp hardware, chair legs, window mullions.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.075, 0.085, 0.086, 1)
+roughness = 0.42
+metallic = 0.72

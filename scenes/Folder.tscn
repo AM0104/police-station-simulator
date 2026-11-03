@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/folder.gd" id="1_folder"]
+[ext_resource type="Material" path="res://materials/folder.tres" id="2_folder_mat"]
+[ext_resource type="Material" path="res://materials/paper.tres" id="3_paper_mat"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cover"]
+material = ExtResource("2_folder_mat")
+size = Vector3(0.38, 0.035, 0.28)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pages"]
+material = ExtResource("3_paper_mat")
+size = Vector3(0.345, 0.026, 0.245)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tab"]
+material = ExtResource("3_paper_mat")
+size = Vector3(0.12, 0.032, 0.07)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_folder"]
+size = Vector3(0.4, 0.1, 0.3)
+
+[node name="Folder" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_folder")
+
+[node name="Cover" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_cover")
+
+[node name="Pages" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.03, 0)
+mesh = SubResource("BoxMesh_pages")
+
+[node name="Tab" type="MeshInstance3D" parent="."]
+position = Vector3(-0.12, 0.035, -0.09)
+mesh = SubResource("BoxMesh_tab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.025, 0)
+shape = SubResource("BoxShape3D_folder")
+
+[node name="TitleLabel" type="Label3D" parent="."]
+visible = false
+position = Vector3(0, 0.26, 0)
+pixel_size = 0.0012
+billboard = 1
+modulate = Color(0.84, 0.82, 0.7, 1)
+outline_modulate = Color(0.02, 0.025, 0.025, 0.9)
+text = "CASE FILE"
+font_size = 24
+outline_size = 5

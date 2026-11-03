@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Detective Morozov"
+text = "The city doesn't sleep. It just changes shifts. Keep your eyes open, clerk."
+speaker_ru = "Детектив Морозов"
+text_ru = "Город не спит. Он просто меняет смены. Смотри в оба, клерк."

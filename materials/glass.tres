@@ -1,0 +1,8 @@
+; Dirty, translucent window glass. Kept faint so the rain reads clearly.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.18, 0.31, 0.34, 0.16)
+roughness = 0.12
+metallic = 0.45

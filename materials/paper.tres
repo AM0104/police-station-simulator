@@ -1,0 +1,7 @@
+; Loose paper and typewritten pages.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.68, 0.64, 0.52, 1)
+roughness = 0.95
+metallic = 0.0

@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/shelf.gd" id="1_shelf"]
+[ext_resource type="Material" path="res://materials/wood.tres" id="2_wood"]
+[ext_resource type="Material" path="res://materials/metal.tres" id="3_metal"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_back"]
+material = ExtResource("2_wood")
+size = Vector3(2.94, 2.34, 0.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_side"]
+material = ExtResource("2_wood")
+size = Vector3(0.06, 2.35, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_plank"]
+material = ExtResource("2_wood")
+size = Vector3(2.94, 0.055, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_files"]
+albedo_color = Color(1, 1, 1, 1)
+metallic = 0.0
+roughness = 0.92
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_file"]
+material = SubResource("StandardMaterial3D_files")
+size = Vector3(0.075, 0.3, 0.35)
+
+[sub_resource type="MultiMesh" id="MultiMesh_files"]
+resource_local_to_scene = true
+transform_format = 1
+use_colors = true
+mesh = SubResource("BoxMesh_file")
+
+[sub_resource type="BoxMesh" id="BoxMesh_label"]
+material = ExtResource("3_metal")
+size = Vector3(0.045, 0.05, 0.015)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_shelf"]
+size = Vector3(3.0, 2.35, 0.52)
+
+[node name="Shelf" type="Node3D"]
+script = ExtResource("1_shelf")
+
+[node name="Body" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+position = Vector3(0, 1.175, 0)
+shape = SubResource("BoxShape3D_shelf")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Back" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 1.17, -0.23)
+mesh = SubResource("BoxMesh_back")
+
+[node name="SideLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-1.47, 1.175, 0)
+mesh = SubResource("BoxMesh_side")
+
+[node name="SideRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(1.47, 1.175, 0)
+mesh = SubResource("BoxMesh_side")
+
+[node name="Plank01" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.22, 0)
+mesh = SubResource("BoxMesh_plank")
+
+[node name="Plank02" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.82, 0)
+mesh = SubResource("BoxMesh_plank")
+
+[node name="Plank03" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 1.42, 0)
+mesh = SubResource("BoxMesh_plank")
+
+[node name="Plank04" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 2.02, 0)
+mesh = SubResource("BoxMesh_plank")
+
+[node name="TopCap" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 2.33, 0)
+mesh = SubResource("BoxMesh_plank")
+
+[node name="Kick" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.08, 0.24)
+mesh = SubResource("BoxMesh_plank")
+
+[node name="Files" type="MultiMeshInstance3D" parent="Visual"]
+multimesh = SubResource("MultiMesh_files")
+cast_shadow = 0
+
+[node name="LabelHolderA" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.22, 0.54, 0.245)
+mesh = SubResource("BoxMesh_label")
+
+[node name="LabelHolderB" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.66, 1.14, 0.245)
+mesh = SubResource("BoxMesh_label")

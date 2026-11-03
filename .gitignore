@@ -1,0 +1,23 @@
+# Godot editor/runtime cache. Regenerated automatically on import.
+.godot/
+*.log
+
+# Temporary test caches that are never part of the project.
+.godot_appdata/
+.godot_localappdata/
+.godot_userdata/
+.check/
+.check_userdata/
+.tools/
+.station_build/
+.station_qa/
+LocalLow/
+export_templates/
+feature_profiles/
+script_templates/
+text_editor_themes/
+
+# Local backup archive, not part of the source tree.
+Archive_First_Day_Godot43.zip
+
+docs/screenshots/*.import

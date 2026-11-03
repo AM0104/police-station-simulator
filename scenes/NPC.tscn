@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/station_npc.gd" id="1_npc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_body"]
+radius = 0.28
+height = 1.55
+radial_segments = 16
+rings = 6
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+radius = 0.165
+height = 0.33
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_arm"]
+radius = 0.065
+height = 0.62
+radial_segments = 8
+rings = 3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hat_brim"]
+top_radius = 0.23
+bottom_radius = 0.23
+height = 0.025
+radial_segments = 20
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hat_crown"]
+top_radius = 0.145
+bottom_radius = 0.16
+height = 0.18
+radial_segments = 20
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="Material_head"]
+albedo_color = Color(0.62, 0.48, 0.37, 1)
+roughness = 0.9
+metallic = 0.0
+
+[sub_resource type="StandardMaterial3D" id="Material_hat"]
+albedo_color = Color(0.055, 0.06, 0.055, 1)
+roughness = 0.82
+metallic = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Material_ring"]
+albedo_color = Color(0.45, 0.32, 0.12, 1)
+emission_enabled = true
+emission = Color(0.85, 0.55, 0.18, 1)
+emission_energy_multiplier = 1.4
+roughness = 0.55
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape_npc"]
+radius = 0.32
+height = 1.8
+
+[sub_resource type="TorusMesh" id="TorusMesh_ring"]
+inner_radius = 0.32
+outer_radius = 0.39
+rings = 24
+ring_segments = 8
+
+[node name="NPC" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 9
+floor_snap_length = 0.3
+script = ExtResource("1_npc")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82, 0)
+mesh = SubResource("CapsuleMesh_body")
+
+[node name="Head" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72, 0)
+mesh = SubResource("SphereMesh_head")
+material_override = SubResource("Material_head")
+
+[node name="LeftArm" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(0.996195, 0, 0.0871557, 0, 1, 0, -0.0871557, 0, 0.996195, -0.34, 1.02, 0.02)
+mesh = SubResource("CapsuleMesh_arm")
+
+[node name="RightArm" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 0.34, 1.02, 0.02)
+mesh = SubResource("CapsuleMesh_arm")
+
+[node name="Hat" type="Node3D" parent="Visual"]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89, 0)
+
+[node name="Brim" type="MeshInstance3D" parent="Visual/Hat"]
+mesh = SubResource("CylinderMesh_hat_brim")
+material_override = SubResource("Material_hat")
+
+[node name="Crown" type="MeshInstance3D" parent="Visual/Hat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+mesh = SubResource("CylinderMesh_hat_crown")
+material_override = SubResource("Material_hat")
+
+[node name="NameLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28, 0)
+pixel_size = 0.004
+billboard = 1
+text = "Officer"
+font_size = 28
+outline_size = 8
+modulate = Color(0.94, 0.91, 0.8, 1)
+outline_modulate = Color(0.015, 0.02, 0.02, 0.95)
+
+[node name="RoleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08, 0)
+pixel_size = 0.0028
+billboard = 1
+text = "CLERK"
+font_size = 18
+outline_size = 6
+modulate = Color(0.57, 0.62, 0.56, 1)
+outline_modulate = Color(0.015, 0.02, 0.02, 0.95)
+
+[node name="FocusRing" type="MeshInstance3D" parent="."]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+cast_shadow = 0
+mesh = SubResource("TorusMesh_ring")
+material_override = SubResource("Material_ring")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape_npc")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.55
+target_desired_distance = 0.75
+radius = 0.38
+height = 1.75
+max_speed = 1.5
+avoidance_enabled = false

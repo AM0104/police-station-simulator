@@ -1,0 +1,195 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/station_hud.gd" id="1_hud"]
+
+[sub_resource type="SystemFont" id="SystemFont_serif"]
+font_names = PackedStringArray("Georgia", "Times New Roman", "Liberation Serif")
+
+[sub_resource type="SystemFont" id="SystemFont_mono"]
+font_names = PackedStringArray("Courier New", "Liberation Mono", "Consolas")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_objective"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+bg_color = Color(0.012, 0.025, 0.026, 0.84)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.41, 0.31, 0.17, 0.95)
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toast"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.03, 0.045, 0.04, 0.92)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.39, 0.47, 0.35, 0.8)
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 10
+
+[node name="StationHUD" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="Control" parent="Root"]
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Horizontal" type="ColorRect" parent="Root/Crosshair"]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 16.0
+offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0.9, 0.82, 0.63, 0.78)
+
+[node name="Vertical" type="ColorRect" parent="Root/Crosshair"]
+layout_mode = 0
+offset_left = 7.0
+offset_right = 9.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0.9, 0.82, 0.63, 0.78)
+
+[node name="ObjectivePanel" type="PanelContainer" parent="Root"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 398.0
+offset_bottom = 158.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_objective")
+
+[node name="Margin" type="MarginContainer" parent="Root/ObjectivePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="VBox" type="VBoxContainer" parent="Root/ObjectivePanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Kicker" type="Label" parent="Root/ObjectivePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76, 0.58, 0.29, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 10
+text = "ТЕКУЩАЯ ЗАДАЧА"
+
+[node name="Objective" type="Label" parent="Root/ObjectivePanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.87, 0.77, 1)
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = SubResource("SystemFont_serif")
+theme_override_font_sizes/font_size = 17
+text = "Дождитесь начальника Аркадия."
+autowrap_mode = 3
+
+[node name="Rule" type="ColorRect" parent="Root/ObjectivePanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.34, 0.28, 0.17, 0.8)
+
+[node name="Rank" type="Label" parent="Root/ObjectivePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.63, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 10
+text = "ЗВАНИЕ  ·  КЛЕРК"
+
+[node name="Toast" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -270.0
+offset_top = 88.0
+offset_right = 270.0
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toast")
+
+[node name="Margin" type="MarginContainer" parent="Root/Toast"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="ToastLabel" type="Label" parent="Root/Toast/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.72, 0.39, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "ПАПКИ ВЗЯТЫ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Prompt" type="Label" parent="Root"]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -420.0
+offset_top = -100.0
+offset_right = 420.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.97, 0.79, 0.46, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.015, 0.016, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 15
+text = "[ E ]   ВЗАИМОДЕЙСТВИЕ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="Label" parent="Root"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -42.0
+offset_right = 980.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.5, 0.6, 0.57, 0.9)
+theme_override_colors/font_outline_color = Color(0.01, 0.015, 0.016, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "WASD  ХОДЬБА     ·     МЫШЬ  ОБЗОР     ·     E  ВЗАИМОДЕЙСТВИЕ     ·     ESC  НАСТРОЙКИ"

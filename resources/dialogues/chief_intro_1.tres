@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+[ext_resource type="Resource" path="res://resources/dialogues/chief_intro_2.tres" id="2_next"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Chief Arkady"
+text = "You're the new clerk. Twenty-two, fresh out of school, and already buried in other people's paper."
+speaker_ru = "Начальник Аркадий"
+text_ru = "Ты новый клерк. Двадцать два года, только со школы — и уже по уши в чужих бумагах."
+next_line = ExtResource("2_next")

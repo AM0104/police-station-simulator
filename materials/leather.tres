@@ -1,0 +1,7 @@
+; Dark green leather desk blotter.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.055, 0.075, 0.061, 1)
+roughness = 0.68
+metallic = 0.02

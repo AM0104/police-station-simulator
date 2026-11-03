@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+[ext_resource type="Resource" path="res://resources/dialogues/chief_promotion_3.tres" id="2_next"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Chief Arkady"
+text = "Kravtsov. I saw the way you looked when the name came up. A clever clerk is dangerous. A quiet one gets promoted."
+speaker_ru = "Начальник Аркадий"
+text_ru = "Кравцов. Я видел, как ты вздрогнул, когда прозвучало это имя. Умный клерк опасен. Тихий — получает повышение."
+next_line = ExtResource("2_next")

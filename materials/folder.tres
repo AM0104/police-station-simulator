@@ -1,0 +1,7 @@
+; Desaturated beige manila folders.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.51, 0.45, 0.31, 1)
+roughness = 0.92
+metallic = 0.0

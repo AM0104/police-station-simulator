@@ -1,0 +1,10 @@
+; Warm bulb / desk-lamp glow. Used on visible emissive pieces.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.95, 0.68, 0.32, 1)
+emission_enabled = true
+emission = Color(1, 0.62, 0.24, 1)
+emission_energy_multiplier = 3.2
+roughness = 0.35
+metallic = 0.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Arkady Petrovich"
+text = "Forget this folder. Understood?"
+speaker_ru = "Аркадий Петрович"
+text_ru = "Забудь эту папку. Понял?"
+next_line = null

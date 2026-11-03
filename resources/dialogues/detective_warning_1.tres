@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+[ext_resource type="Resource" path="res://resources/dialogues/detective_warning_2.tres" id="2_next"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Detective Vlasov"
+text = "Hey. New guy. I heard you found something in the archive."
+speaker_ru = "Детектив Власов"
+text_ru = "Эй. Новенький. Говорят, ты нашёл кое-что в архиве."
+next_line = ExtResource("2_next")

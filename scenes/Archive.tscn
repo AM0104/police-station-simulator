@@ -1,0 +1,835 @@
+[gd_scene load_steps=65 format=3 uid="uid://bwry1vkmhjl2d"]
+
+[ext_resource type="Script" uid="uid://ckqsiiif5vch4" path="res://scripts/archive.gd" id="1_archive"]
+[ext_resource type="PackedScene" uid="uid://dcuyyjm8mjjjk" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://dsw75vecftjii" path="res://scenes/Folder.tscn" id="3_folder"]
+[ext_resource type="PackedScene" uid="uid://crefdyd5w0jwn" path="res://scenes/FolderUI.tscn" id="4_folder_ui"]
+[ext_resource type="PackedScene" uid="uid://cvcx8462mswpp" path="res://scenes/DialogueUI.tscn" id="5_dialogue_ui"]
+[ext_resource type="PackedScene" uid="uid://bgx1t6782mt71" path="res://scenes/FinalUI.tscn" id="6_final_ui"]
+[ext_resource type="PackedScene" uid="uid://qwh8wyxs7rlc" path="res://scenes/NoirOverlay.tscn" id="7_noir_overlay"]
+[ext_resource type="PackedScene" uid="uid://ilv7v8xolw86" path="res://scenes/Shelf.tscn" id="8_shelf"]
+[ext_resource type="Material" path="res://materials/wall.tres" id="9_wall"]
+[ext_resource type="Material" path="res://materials/floor.tres" id="10_floor"]
+[ext_resource type="Material" path="res://materials/desk.tres" id="11_desk"]
+[ext_resource type="Material" path="res://materials/wood.tres" id="12_wood"]
+[ext_resource type="Material" path="res://materials/metal.tres" id="13_metal"]
+[ext_resource type="Material" path="res://materials/folder.tres" id="14_folder"]
+[ext_resource type="Material" path="res://materials/paper.tres" id="15_paper"]
+[ext_resource type="Material" path="res://materials/warm_emission.tres" id="16_warm"]
+[ext_resource type="Material" path="res://materials/window_night.tres" id="17_night"]
+[ext_resource type="Material" path="res://materials/rain.tres" id="18_rain"]
+[ext_resource type="Material" path="res://materials/glass.tres" id="19_glass"]
+[ext_resource type="Material" path="res://materials/shade.tres" id="20_shade"]
+[ext_resource type="Material" path="res://materials/leather.tres" id="21_leather"]
+[ext_resource type="Resource" path="res://resources/forget_the_folder.tres" id="22_dialogue"]
+[ext_resource type="Script" uid="uid://dynufv1wj425s" path="res://scripts/flicker_lamp.gd" id="23_flicker"]
+[ext_resource type="PackedScene" path="res://scenes/SettingsUI.tscn" id="24_settings_ui"]
+
+[sub_resource type="Environment" id="Environment_archive"]
+background_mode = 1
+background_color = Color(0.005, 0.008, 0.009, 1)
+background_energy_multiplier = 0.45
+ambient_light_source = 2
+ambient_light_color = Color(0.27, 0.37, 0.38, 1)
+ambient_light_energy = 1.2
+tonemap_mode = 3
+tonemap_exposure = 1.28
+tonemap_white = 6.0
+ssao_enabled = true
+ssao_radius = 1.2
+ssao_intensity = 1.6
+ssao_power = 1.3
+glow_enabled = true
+glow_intensity = 0.75
+glow_strength = 1.05
+glow_bloom = 0.09
+glow_hdr_threshold = 0.85
+fog_enabled = true
+fog_light_color = Color(0.15, 0.24, 0.25, 1)
+fog_light_energy = 0.65
+fog_density = 0.05
+fog_aerial_perspective = 0.3
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.018
+volumetric_fog_albedo = Color(0.56, 0.7, 0.7, 1)
+volumetric_fog_emission = Color(0.012, 0.03, 0.032, 1)
+volumetric_fog_emission_energy = 0.25
+volumetric_fog_anisotropy = 0.35
+volumetric_fog_length = 32.0
+adjustment_enabled = true
+adjustment_brightness = 1.02
+adjustment_contrast = 1.1
+adjustment_saturation = 0.88
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+material = ExtResource("10_floor")
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ceiling"]
+material = ExtResource("9_wall")
+size = Vector3(10.4, 0.2, 10.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ns"]
+material = ExtResource("9_wall")
+size = Vector3(10.4, 3, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_ns"]
+size = Vector3(10.4, 3, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ew"]
+material = ExtResource("9_wall")
+size = Vector3(0.2, 3, 10.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_ew"]
+size = Vector3(0.2, 3, 10.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_baseboard_ns"]
+material = ExtResource("12_wood")
+size = Vector3(9.9, 0.17, 0.055)
+
+[sub_resource type="BoxMesh" id="BoxMesh_baseboard_ew"]
+material = ExtResource("12_wood")
+size = Vector3(0.055, 0.17, 9.9)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pipe"]
+material = ExtResource("13_metal")
+top_radius = 0.055
+bottom_radius = 0.055
+height = 9.7
+radial_segments = 14
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_rug"]
+material = ExtResource("21_leather")
+size = Vector3(3.6, 0.012, 2.6)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_window"]
+material = ExtResource("17_night")
+size = Vector2(1.85, 1.16)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rain"]
+emission_shape = 3
+emission_box_extents = Vector3(0.91, 0.015, 0.012)
+direction = Vector3(0, -1, 0)
+spread = 3.0
+initial_velocity_min = 0.7
+initial_velocity_max = 1.2
+gravity = Vector3(0, -5, 0)
+scale_min = 0.75
+scale_max = 1.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_rain"]
+material = ExtResource("18_rain")
+size = Vector3(0.004, 0.2, 0.004)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_glass"]
+material = ExtResource("19_glass")
+size = Vector2(1.85, 1.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_window_h"]
+material = ExtResource("13_metal")
+size = Vector3(2.1, 0.08, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_window_v"]
+material = ExtResource("13_metal")
+size = Vector3(0.08, 1.32, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_window_mullion"]
+material = ExtResource("13_metal")
+size = Vector3(0.045, 1.2, 0.065)
+
+[sub_resource type="BoxMesh" id="BoxMesh_window_sill"]
+material = ExtResource("12_wood")
+size = Vector3(2.16, 0.09, 0.32)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ceiling_wire"]
+material = ExtResource("13_metal")
+top_radius = 0.007
+bottom_radius = 0.007
+height = 0.34
+radial_segments = 8
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ceiling_shade"]
+material = ExtResource("20_shade")
+top_radius = 0.06
+bottom_radius = 0.28
+height = 0.15
+radial_segments = 28
+rings = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_ceiling_bulb"]
+material = ExtResource("16_warm")
+radius = 0.055
+height = 0.11
+radial_segments = 16
+rings = 8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_desk"]
+size = Vector3(2.4, 0.1, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_desk_top"]
+material = ExtResource("11_desk")
+size = Vector3(2.4, 0.1, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_blotter"]
+material = ExtResource("21_leather")
+size = Vector3(1.08, 0.012, 0.56)
+
+[sub_resource type="BoxMesh" id="BoxMesh_desk_leg"]
+material = ExtResource("12_wood")
+size = Vector3(0.09, 0.78, 0.09)
+
+[sub_resource type="BoxMesh" id="BoxMesh_desk_drawer"]
+material = ExtResource("11_desk")
+size = Vector3(1.28, 0.2, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_knob"]
+material = ExtResource("13_metal")
+radius = 0.02
+height = 0.04
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lamp_base"]
+material = ExtResource("13_metal")
+top_radius = 0.12
+bottom_radius = 0.14
+height = 0.035
+radial_segments = 24
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lamp_stem"]
+material = ExtResource("13_metal")
+top_radius = 0.017
+bottom_radius = 0.017
+height = 0.44
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lamp_shade"]
+material = ExtResource("20_shade")
+top_radius = 0.06
+bottom_radius = 0.2
+height = 0.16
+radial_segments = 24
+rings = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_lamp_bulb"]
+material = ExtResource("16_warm")
+radius = 0.055
+height = 0.11
+radial_segments = 16
+rings = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_paper_stack"]
+material = ExtResource("15_paper")
+size = Vector3(0.34, 0.06, 0.24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_folder_stack"]
+material = ExtResource("14_folder")
+size = Vector3(0.4, 0.035, 0.29)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chair_seat"]
+material = ExtResource("12_wood")
+size = Vector3(0.56, 0.07, 0.52)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chair_back"]
+material = ExtResource("12_wood")
+size = Vector3(0.56, 0.62, 0.065)
+
+[sub_resource type="BoxMesh" id="BoxMesh_chair_leg"]
+material = ExtResource("12_wood")
+size = Vector3(0.055, 0.46, 0.055)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
+content_margin_left = 16.0
+content_margin_top = 9.0
+content_margin_right = 16.0
+content_margin_bottom = 9.0
+bg_color = Color(0.01, 0.027, 0.03, 0.68)
+border_width_bottom = 1
+border_color = Color(0.22, 0.34, 0.32, 0.65)
+
+[sub_resource type="SystemFont" id="SystemFont_mono"]
+font_names = PackedStringArray("Courier New", "Liberation Mono", "Consolas")
+
+[node name="Archive" type="Node3D"]
+script = ExtResource("1_archive")
+forgotten_case_dialogue = ExtResource("22_dialogue")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_archive")
+
+[node name="ColdDirectional" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.788011, 0.457526, -0.411958, 0, 0.669131, 0.743145, 0.615662, -0.585606, 0.527282, 0, 0, 0)
+light_color = Color(0.44, 0.64, 0.68, 1)
+light_energy = 0.55
+
+[node name="ColdRoomFill" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 2.2)
+light_color = Color(0.32, 0.5, 0.55, 1)
+light_energy = 2.4
+light_specular = 0.15
+omni_range = 11.0
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_ceiling")
+
+[node name="NorthWall" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.1)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/NorthWall"]
+mesh = SubResource("BoxMesh_wall_ns")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/NorthWall"]
+shape = SubResource("BoxShape3D_wall_ns")
+
+[node name="SouthWall" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5.1)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/SouthWall"]
+mesh = SubResource("BoxMesh_wall_ns")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/SouthWall"]
+shape = SubResource("BoxShape3D_wall_ns")
+
+[node name="WestWall" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 1.5, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/WestWall"]
+mesh = SubResource("BoxMesh_wall_ew")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/WestWall"]
+shape = SubResource("BoxShape3D_wall_ew")
+
+[node name="EastWall" type="StaticBody3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 1.5, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/EastWall"]
+mesh = SubResource("BoxMesh_wall_ew")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/EastWall"]
+shape = SubResource("BoxShape3D_wall_ew")
+
+[node name="BaseboardNorth" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, -4.99)
+mesh = SubResource("BoxMesh_baseboard_ns")
+
+[node name="BaseboardSouth" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 4.99)
+mesh = SubResource("BoxMesh_baseboard_ns")
+
+[node name="BaseboardWest" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.99, 0.085, 0)
+mesh = SubResource("BoxMesh_baseboard_ew")
+
+[node name="BaseboardEast" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99, 0.085, 0)
+mesh = SubResource("BoxMesh_baseboard_ew")
+
+[node name="PipeA" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.8, -2)
+mesh = SubResource("CylinderMesh_pipe")
+
+[node name="PipeB" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.92, 1.7)
+mesh = SubResource("CylinderMesh_pipe")
+
+[node name="PipeCorner" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76, 1.45, -4.76)
+mesh = SubResource("CylinderMesh_pipe")
+
+[node name="Rug" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007, -0.65)
+mesh = SubResource("BoxMesh_rug")
+
+[node name="Shelves" type="Node3D" parent="."]
+
+[node name="ShelfNorth" parent="Shelves" instance=ExtResource("8_shelf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35, 0, -4.55)
+
+[node name="ShelfSouth" parent="Shelves" instance=ExtResource("8_shelf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 4.55)
+shelf_seed = 2
+
+[node name="ShelfWest" parent="Shelves" instance=ExtResource("8_shelf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.55, 0, 0.9)
+shelf_seed = 3
+
+[node name="ShelfEast" parent="Shelves" instance=ExtResource("8_shelf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.55, 0, -1.75)
+shelf_seed = 4
+
+[node name="Window" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 2.12, -4.86)
+
+[node name="Backdrop" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_window")
+
+[node name="Rain" type="GPUParticles3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0.055)
+cast_shadow = 0
+amount = 100
+lifetime = 0.5
+preprocess = 0.5
+interpolate = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_rain")
+draw_pass_1 = SubResource("BoxMesh_rain")
+
+[node name="Glass" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.045)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_glass")
+
+[node name="FrameTop" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, 0.09)
+mesh = SubResource("BoxMesh_window_h")
+
+[node name="FrameBottom" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.62, 0.09)
+mesh = SubResource("BoxMesh_window_h")
+
+[node name="FrameLeft" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.98, 0, 0.09)
+mesh = SubResource("BoxMesh_window_v")
+
+[node name="FrameRight" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98, 0, 0.09)
+mesh = SubResource("BoxMesh_window_v")
+
+[node name="Mullion" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.09)
+mesh = SubResource("BoxMesh_window_mullion")
+
+[node name="Sill" type="MeshInstance3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.69, 0.15)
+mesh = SubResource("BoxMesh_window_sill")
+
+[node name="ColdWindowLight" type="OmniLight3D" parent="Window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.55)
+light_color = Color(0.3, 0.56, 0.63, 1)
+light_energy = 2.2
+light_specular = 0.3
+omni_range = 4.8
+
+[node name="CeilingLamp" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78, 0.25)
+
+[node name="Wire" type="MeshInstance3D" parent="CeilingLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, 0)
+mesh = SubResource("CylinderMesh_ceiling_wire")
+
+[node name="Shade" type="MeshInstance3D" parent="CeilingLamp"]
+mesh = SubResource("CylinderMesh_ceiling_shade")
+
+[node name="Bulb" type="MeshInstance3D" parent="CeilingLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0)
+mesh = SubResource("SphereMesh_ceiling_bulb")
+
+[node name="FlickerLight" type="OmniLight3D" parent="CeilingLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12, 0)
+light_color = Color(1, 0.73, 0.42, 1)
+light_energy = 4.2
+light_specular = 0.35
+omni_range = 10.0
+script = ExtResource("23_flicker")
+
+[node name="Desk" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
+
+[node name="DeskBody" type="StaticBody3D" parent="Desk"]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Desk/DeskBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+shape = SubResource("BoxShape3D_desk")
+
+[node name="Top" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+mesh = SubResource("BoxMesh_desk_top")
+
+[node name="Blotter" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.835, 0.03)
+mesh = SubResource("BoxMesh_blotter")
+
+[node name="LegFL" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.39, 0.5)
+mesh = SubResource("BoxMesh_desk_leg")
+
+[node name="LegFR" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.39, 0.5)
+mesh = SubResource("BoxMesh_desk_leg")
+
+[node name="LegBL" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.39, -0.5)
+mesh = SubResource("BoxMesh_desk_leg")
+
+[node name="LegBR" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.39, -0.5)
+mesh = SubResource("BoxMesh_desk_leg")
+
+[node name="Drawer" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.31)
+mesh = SubResource("BoxMesh_desk_drawer")
+
+[node name="KnobLeft" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38, 0.65, 0.57)
+mesh = SubResource("SphereMesh_knob")
+
+[node name="KnobRight" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, 0.65, 0.57)
+mesh = SubResource("SphereMesh_knob")
+
+[node name="DeskLamp" type="Node3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82, 0.841, -0.33)
+
+[node name="Base" type="MeshInstance3D" parent="Desk/DeskLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0175, 0)
+mesh = SubResource("CylinderMesh_lamp_base")
+
+[node name="Stem" type="MeshInstance3D" parent="Desk/DeskLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("CylinderMesh_lamp_stem")
+
+[node name="Shade" type="MeshInstance3D" parent="Desk/DeskLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+mesh = SubResource("CylinderMesh_lamp_shade")
+
+[node name="Bulb" type="MeshInstance3D" parent="Desk/DeskLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("SphereMesh_lamp_bulb")
+
+[node name="DeskLight" type="OmniLight3D" parent="Desk/DeskLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+light_color = Color(1, 0.63, 0.28, 1)
+light_energy = 3.0
+light_specular = 0.45
+shadow_enabled = true
+omni_range = 5.2
+
+[node name="PaperStack" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(0.990268, 0, -0.139173, 0, 1, 0, 0.139173, 0, 0.990268, 0.78, 0.88, -0.26)
+mesh = SubResource("BoxMesh_paper_stack")
+
+[node name="PaperStack2" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(0.996195, 0, 0.0871557, 0, 1, 0, -0.0871557, 0, 0.996195, 0.76, 0.943, -0.25)
+mesh = SubResource("BoxMesh_paper_stack")
+
+[node name="FolderStack" type="MeshInstance3D" parent="Desk"]
+transform = Transform3D(0.99863, 0, -0.052336, 0, 1, 0, 0.052336, 0, 0.99863, 0.79, 0.99, -0.27)
+mesh = SubResource("BoxMesh_folder_stack")
+
+[node name="Chair" type="Node3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.12)
+
+[node name="Seat" type="MeshInstance3D" parent="Desk/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48, 0)
+mesh = SubResource("BoxMesh_chair_seat")
+
+[node name="Back" type="MeshInstance3D" parent="Desk/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.25)
+mesh = SubResource("BoxMesh_chair_back")
+
+[node name="Leg1" type="MeshInstance3D" parent="Desk/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.23, -0.2)
+mesh = SubResource("BoxMesh_chair_leg")
+
+[node name="Leg2" type="MeshInstance3D" parent="Desk/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.23, -0.2)
+mesh = SubResource("BoxMesh_chair_leg")
+
+[node name="Leg3" type="MeshInstance3D" parent="Desk/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.23, 0.2)
+mesh = SubResource("BoxMesh_chair_leg")
+
+[node name="Leg4" type="MeshInstance3D" parent="Desk/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.23, 0.2)
+mesh = SubResource("BoxMesh_chair_leg")
+
+[node name="Folders" type="Node3D" parent="."]
+
+[node name="FolderIncident" parent="Folders" instance=ExtResource("3_folder")]
+transform = Transform3D(0.990268, 0, 0.139173, 0, 1, 0, -0.139173, 0, 0.990268, -0.62, 0.858, -0.3)
+folder_title = "Incident Report No. 4412"
+document_text = "PRECINCT 7  ·  INCIDENT REPORT No. 4412
+
+Reported: 14.03.1987  ·  02:40
+Location: Pier 9, warehouse row
+Officer: S. Vlasov
+
+A door was forced at the loading bay. No stock was removed. The night watchman reports a man in a grey coat asking for the Kravtsov file.
+
+Filed by: Sergeant M. Orlova"
+document_back_text = "ARCHIVE INTAKE STAMP
+
+Received at records office: 13.03.1987
+Clerk: E. Danilova
+
+Note: the incident described on the front page is dated one day after this report was received.
+
+Attachment: one brass key, inventory tag 44-B."
+folder_title_ru = "Рапорт о происшествии № 4412"
+document_text_ru = "УЧАСТОК 7  ·  РАПОРТ О ПРОИСШЕСТВИИ № 4412
+
+Зарегистрировано: 14.03.1987  ·  02:40
+Место: Пирс 9, складской ряд
+Офицер: С. Власов
+
+В погрузочных воротах взломана дверь. Груз не пропал. Ночной сторож сообщил о мужчине в сером пальто, который спрашивал дело Кравцова.
+
+Подал: сержант М. Орлова"
+document_back_text_ru = "ОТМЕТКА АРХИВА О ПРИЁМЕ
+
+Принято в архив: 13.03.1987
+Секретарь: Е. Данилова
+
+Примечание: происшествие на лицевой стороне датировано на день позже приёма рапорта.
+
+Вложение: один латунный ключ, инвентарный ярлык 44-Б."
+has_error = true
+error_type = "date"
+
+[node name="FolderInventory" parent="Folders" instance=ExtResource("3_folder")]
+transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 0, 0.858, -0.17)
+folder_title = "Evidence Inventory — Room B"
+document_text = "PRECINCT 7  ·  EVIDENCE INVENTORY  ·  ROOM B
+
+01  ·  brass key, tag 44-B
+02  ·  grey wool thread, sealed envelope
+03  ·  payroll ledger, 1985-1986
+04  ·  unmarked audio reel
+
+All items sealed and countersigned.
+
+Custodian: M. Orlova
+Checked: 16.03.1987"
+document_back_text = "CHAIN OF CUSTODY
+
+09.03.1987  ·  item 04 logged by Vlasov
+11.03.1987  ·  item 04 re-sealed by Orlova
+16.03.1987  ·  full inventory verified
+
+No discrepancies. All seals intact."
+folder_title_ru = "Опись улик — комната B"
+document_text_ru = "УЧАСТОК 7  ·  ОПИСЬ УЛИК  ·  КОМНАТА B
+
+01  ·  латунный ключ, ярлык 44-Б
+02  ·  серая шерстяная нить, запечатанный конверт
+03  ·  бухгалтерская книга, 1985–1986
+04  ·  немаркированная аудиоплёнка
+
+Все предметы запечатаны и заверены.
+
+Хранитель: М. Орлова
+Проверено: 16.03.1987"
+document_back_text_ru = "ЦЕПОЧКА ХРАНЕНИЯ
+
+09.03.1987  ·  предмет 04 зарегистрирован Власовым
+11.03.1987  ·  предмет 04 перезапечатан Орловой
+16.03.1987  ·  опись проверена полностью
+
+Расхождений нет. Все пломбы целы."
+
+[node name="FolderCase1987K" parent="Folders" instance=ExtResource("3_folder")]
+transform = Transform3D(0.996195, 0, 0.0871557, 0, 1, 0, -0.0871557, 0, 0.996195, 0.62, 0.858, -0.32)
+folder_title = "Case No. 1987-K"
+document_text = "CASE No. 1987-K
+Classification: SEALED
+
+Subject: disappearance, Pier 9
+Lead: Inspector A. I. Kravtsov
+Status: unresolved
+
+The file contains no witness statements. The door seal was cut from the inside.
+
+Signature: investigator Kravtsov A.I. Date: 12.03.1987"
+document_back_text = "PERSONNEL ADDENDUM
+
+Kravtsov A. I. transferred to Central Records on 04.11.1986.
+Field authority revoked the same day.
+
+A signature dated 12.03.1987 cannot be valid.
+
+Do not duplicate this page."
+folder_title_ru = "Дело № 1987-K"
+document_text_ru = "ДЕЛО № 1987-K
+Гриф: СЕКРЕТНО
+
+Тема: исчезновение, Пирс 9
+Ведущий: следователь А. И. Кравцов
+Статус: не раскрыто
+
+В деле нет показаний свидетелей. Пломба на двери срезана изнутри.
+
+Подпись: следователь Кравцов А.И. Дата: 12.03.1987"
+document_back_text_ru = "КАДРОВОЕ ПРИЛОЖЕНИЕ
+
+Кравцов А. И. переведён в Центральный архив 04.11.1986.
+Полномочия следователя аннулированы в тот же день.
+
+Подпись от 12.03.1987 не может быть подлинной.
+
+Не копировать эту страницу."
+has_error = true
+error_type = "signature"
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 2.8)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Root" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="Control" parent="HUD/Root"]
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Horizontal" type="ColorRect" parent="HUD/Root/Crosshair"]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 16.0
+offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0.88, 0.8, 0.62, 0.78)
+
+[node name="Vertical" type="ColorRect" parent="HUD/Root/Crosshair"]
+layout_mode = 0
+offset_left = 7.0
+offset_right = 9.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0.88, 0.8, 0.62, 0.78)
+
+[node name="TopBar" type="PanelContainer" parent="HUD/Root"]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud")
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/TopBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="Row" type="HBoxContainer" parent="HUD/Root/TopBar/Margin"]
+layout_mode = 2
+
+[node name="ObjectiveLabel" type="Label" parent="HUD/Root/TopBar/Margin/Row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.7, 0.58, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.015, 0.016, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 13
+text = "ARCHIVE — FIRST DAY     ·     Review the three files on the desk."
+
+[node name="Spacer" type="Control" parent="HUD/Root/TopBar/Margin/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ProgressLabel" type="Label" parent="HUD/Root/TopBar/Margin/Row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.69, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.015, 0.016, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 13
+text = "REVIEWED  0 / 3"
+
+[node name="Prompt" type="Label" parent="HUD/Root"]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -100.0
+offset_right = 380.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.95, 0.76, 0.43, 1)
+theme_override_colors/font_outline_color = Color(0.01, 0.015, 0.016, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 16
+text = "[ E ]   READ FILE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlsHint" type="Label" parent="HUD/Root"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -42.0
+offset_right = 860.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.5, 0.6, 0.57, 0.9)
+theme_override_colors/font_outline_color = Color(0.01, 0.015, 0.016, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "WASD  MOVE     ·     MOUSE  LOOK     ·     E  READ     ·     ESC  SETTINGS"
+
+[node name="NoirOverlay" parent="." instance=ExtResource("7_noir_overlay")]
+
+[node name="FolderUI" parent="." instance=ExtResource("4_folder_ui")]
+
+[node name="DialogueUI" parent="." instance=ExtResource("5_dialogue_ui")]
+
+[node name="FinalUI" parent="." instance=ExtResource("6_final_ui")]
+
+[node name="SettingsUI" parent="." instance=ExtResource("24_settings_ui")]

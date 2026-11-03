@@ -1,0 +1,10 @@
+; Rain-soaked night beyond the basement window.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.03, 0.09, 0.105, 1)
+emission_enabled = true
+emission = Color(0.055, 0.26, 0.29, 1)
+emission_energy_multiplier = 2.2
+roughness = 0.28
+metallic = 0.25

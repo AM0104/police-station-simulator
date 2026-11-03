@@ -1,0 +1,7 @@
+; Dark, oiled archive shelving.
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.17, 0.105, 0.065, 1)
+roughness = 0.82
+metallic = 0.05

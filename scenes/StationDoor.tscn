@@ -1,0 +1,248 @@
+[gd_scene load_steps=27 format=3]
+
+[ext_resource type="Script" path="res://scripts/station_door.gd" id="1_door"]
+[ext_resource type="Material" path="res://materials/wood.tres" id="2_wood"]
+[ext_resource type="Material" path="res://materials/desk.tres" id="3_desk"]
+[ext_resource type="Material" path="res://materials/metal.tres" id="4_metal"]
+[ext_resource type="Material" path="res://materials/glass.tres" id="5_glass"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_door_slab"]
+material = ExtResource("2_wood")
+size = Vector3(1.3, 2.3, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape_door"]
+size = Vector3(1.3, 2.3, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_side"]
+material = ExtResource("2_wood")
+size = Vector3(0.16, 2.42, 0.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_top"]
+material = ExtResource("2_wood")
+size = Vector3(1.62, 0.16, 0.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_crown"]
+material = ExtResource("3_desk")
+size = Vector3(1.78, 0.07, 0.22)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_plinth"]
+material = ExtResource("3_desk")
+size = Vector3(0.2, 0.26, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_threshold"]
+material = ExtResource("4_metal")
+size = Vector3(1.56, 0.018, 0.24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_door_stile"]
+material = ExtResource("3_desk")
+size = Vector3(0.09, 2.12, 0.075)
+
+[sub_resource type="BoxMesh" id="BoxMesh_door_rail"]
+material = ExtResource("3_desk")
+size = Vector3(1.14, 0.09, 0.075)
+
+[sub_resource type="BoxMesh" id="BoxMesh_door_panel"]
+material = ExtResource("3_desk")
+size = Vector3(0.4, 0.34, 0.026)
+
+[sub_resource type="BoxMesh" id="BoxMesh_door_panel_inset"]
+material = ExtResource("2_wood")
+size = Vector3(0.3, 0.24, 0.012)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glass_pane"]
+material = ExtResource("5_glass")
+size = Vector3(0.66, 0.66, 0.014)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glass_backing"]
+material = ExtResource("3_desk")
+size = Vector3(0.7, 0.7, 0.012)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glass_bar_v"]
+material = ExtResource("4_metal")
+size = Vector3(0.014, 0.62, 0.018)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glass_bar_h"]
+material = ExtResource("4_metal")
+size = Vector3(0.66, 0.014, 0.018)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kick_plate"]
+material = ExtResource("4_metal")
+size = Vector3(0.96, 0.2, 0.014)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hinge"]
+material = ExtResource("4_metal")
+top_radius = 0.026
+bottom_radius = 0.026
+height = 0.12
+radial_segments = 10
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rosette"]
+material = ExtResource("4_metal")
+top_radius = 0.055
+bottom_radius = 0.055
+height = 0.018
+radial_segments = 14
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_lever"]
+material = ExtResource("4_metal")
+size = Vector3(0.19, 0.035, 0.035)
+
+[sub_resource type="BoxMesh" id="BoxMesh_closer"]
+material = ExtResource("4_metal")
+size = Vector3(0.26, 0.035, 0.035)
+
+[sub_resource type="BoxShape3D" id="BoxShape_trigger"]
+size = Vector3(2.7, 2.4, 1.7)
+
+[node name="StationDoor" type="Node3D"]
+script = ExtResource("1_door")
+
+[node name="FrameLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 1.21, 0)
+mesh = SubResource("BoxMesh_frame_side")
+
+[node name="FrameRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 1.21, 0)
+mesh = SubResource("BoxMesh_frame_side")
+
+[node name="FrameTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39, 0)
+mesh = SubResource("BoxMesh_frame_top")
+
+[node name="FrameCrown" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49, 0)
+mesh = SubResource("BoxMesh_frame_crown")
+
+[node name="PlinthLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 0.13, 0)
+mesh = SubResource("BoxMesh_frame_plinth")
+
+[node name="PlinthRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 0.13, 0)
+mesh = SubResource("BoxMesh_frame_plinth")
+
+[node name="Threshold" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012, 0)
+mesh = SubResource("BoxMesh_threshold")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0, 0)
+
+[node name="DoorBody" type="StaticBody3D" parent="Pivot"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Slab" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.15, 0)
+mesh = SubResource("BoxMesh_door_slab")
+
+[node name="Shape" type="CollisionShape3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.15, 0)
+shape = SubResource("BoxShape_door")
+
+[node name="StileLeft" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 1.15, 0.045)
+mesh = SubResource("BoxMesh_door_stile")
+
+[node name="StileRight" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22, 1.15, 0.045)
+mesh = SubResource("BoxMesh_door_stile")
+
+[node name="TopRail" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 2.05, 0.045)
+mesh = SubResource("BoxMesh_door_rail")
+
+[node name="MidRail" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.22, 0.045)
+mesh = SubResource("BoxMesh_door_rail")
+
+[node name="BottomRail" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.33, 0.045)
+mesh = SubResource("BoxMesh_door_rail")
+
+[node name="GlassBacking" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.63, 0.038)
+mesh = SubResource("BoxMesh_glass_backing")
+
+[node name="Glass" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.63, 0.052)
+mesh = SubResource("BoxMesh_glass_pane")
+
+[node name="GlassBarVertical" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.63, 0.062)
+mesh = SubResource("BoxMesh_glass_bar_v")
+
+[node name="GlassBarHorizontal" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.63, 0.062)
+mesh = SubResource("BoxMesh_glass_bar_h")
+
+[node name="PanelLowerLeft" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36, 0.78, 0.04)
+mesh = SubResource("BoxMesh_door_panel")
+
+[node name="PanelLowerRight" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.94, 0.78, 0.04)
+mesh = SubResource("BoxMesh_door_panel")
+
+[node name="PanelUpperLeft" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36, 1.13, 0.04)
+mesh = SubResource("BoxMesh_door_panel_inset")
+
+[node name="PanelUpperRight" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.94, 1.13, 0.04)
+mesh = SubResource("BoxMesh_door_panel_inset")
+
+[node name="KickPlate" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.16, 0.04)
+mesh = SubResource("BoxMesh_kick_plate")
+
+[node name="HingeTop" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035, 1.92, 0.04)
+mesh = SubResource("CylinderMesh_hinge")
+
+[node name="HingeMid" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035, 1.15, 0.04)
+mesh = SubResource("CylinderMesh_hinge")
+
+[node name="HingeBottom" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035, 0.38, 0.04)
+mesh = SubResource("CylinderMesh_hinge")
+
+[node name="RosetteFront" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.13, 1.05, 0.045)
+mesh = SubResource("CylinderMesh_rosette")
+
+[node name="RosetteBack" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.13, 1.05, -0.045)
+mesh = SubResource("CylinderMesh_rosette")
+
+[node name="LeverFront" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04, 1.05, 0.075)
+mesh = SubResource("BoxMesh_lever")
+
+[node name="CloserArm" type="MeshInstance3D" parent="Pivot/DoorBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98, 2.17, 0.065)
+mesh = SubResource("BoxMesh_closer")
+
+[node name="Trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+collision_layer = 0
+collision_mask = 6
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+shape = SubResource("BoxShape_trigger")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="DoorLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.64, 0.02)
+pixel_size = 0.003
+text = "ДВЕРЬ"
+font_size = 20
+outline_size = 7
+modulate = Color(0.82, 0.77, 0.62, 1)
+outline_modulate = Color(0.01, 0.015, 0.015, 0.9)

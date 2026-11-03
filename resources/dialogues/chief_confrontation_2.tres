@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+[ext_resource type="Resource" path="res://resources/dialogues/chief_confrontation_3.tres" id="2_next"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Chief Arkady"
+text = "The Kravtsov report. I thought it burned with the old archive."
+speaker_ru = "Начальник Аркадий"
+text_ru = "Отчёт Кравцова. Я думал, он сгорел вместе со старым архивом."
+next_line = ExtResource("2_next")

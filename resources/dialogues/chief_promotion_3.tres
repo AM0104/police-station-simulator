@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Chief Arkady"
+text = "Keep your desk clean and your mouth shut. As of tonight, you're a Duty Officer. Don't make me regret it."
+speaker_ru = "Начальник Аркадий"
+text_ru = "Держи стол в порядке, а рот — на замке. С сегодняшней ночи ты дежурный офицер. Не заставь меня пожалеть."
+event_name = "give_promotion"
+event_payload = "duty_officer"

@@ -1,0 +1,389 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/phone_ui.gd" id="1_phone_ui"]
+
+[sub_resource type="SystemFont" id="SystemFont_serif"]
+font_names = PackedStringArray("Georgia", "Times New Roman", "Liberation Serif")
+
+[sub_resource type="SystemFont" id="SystemFont_mono"]
+font_names = PackedStringArray("Courier New", "Liberation Mono", "Consolas")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.025, 0.038, 0.038, 0.985)
+border_width_left = 4
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.37, 0.27, 0.14, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.74)
+shadow_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 18.0
+content_margin_top = 11.0
+content_margin_right = 18.0
+content_margin_bottom = 11.0
+bg_color = Color(0.085, 0.135, 0.13, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.24, 0.35, 0.32, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 18.0
+content_margin_top = 11.0
+content_margin_right = 18.0
+content_margin_bottom = 11.0
+bg_color = Color(0.16, 0.245, 0.225, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.76, 0.59, 0.31, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 18.0
+content_margin_top = 11.0
+content_margin_right = 18.0
+content_margin_bottom = 11.0
+bg_color = Color(0.042, 0.07, 0.066, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.58, 0.43, 0.22, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
+content_margin_left = 18.0
+content_margin_top = 11.0
+content_margin_right = 18.0
+content_margin_bottom = 11.0
+bg_color = Color(0.06, 0.08, 0.078, 0.45)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16, 0.2, 0.19, 0.5)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.65, 0.31, 0.95)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_answer_normal"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+bg_color = Color(0.4, 0.275, 0.105, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.66, 0.47, 0.2, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_answer_hover"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+bg_color = Color(0.57, 0.4, 0.155, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94, 0.72, 0.34, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_answer_pressed"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+bg_color = Color(0.26, 0.17, 0.06, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.76, 0.53, 0.24, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="PhoneUI" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_phone_ui")
+
+[node name="Root" type="Control" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Dim" type="ColorRect" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.004, 0.007, 0.007, 0.74)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="Root/Center/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 38
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 38
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Kicker" type="Label" parent="Root/Center/Panel/Margin/VBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.58, 0.54, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "INCOMING CALL  ·  PRECINCT 7  ·  NIGHT SHIFT"
+
+[node name="Spacer" type="Control" parent="Root/Center/Panel/Margin/VBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="CallNumber" type="Label" parent="Root/Center/Panel/Margin/VBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.62, 0.31, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "CALL 1 OF 3"
+
+[node name="Title" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.88, 0.75, 1)
+theme_override_fonts/font = SubResource("SystemFont_serif")
+theme_override_font_sizes/font_size = 35
+text = "Incoming Call"
+autowrap_mode = 3
+
+[node name="Meta" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.58, 0.52, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "LINE 2  ·  RECEIVER RINGING"
+
+[node name="Rule" type="ColorRect" parent="Root/Center/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.36, 0.26, 0.14, 0.9)
+
+[node name="Body" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 176)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.87, 0.85, 0.77, 1)
+theme_override_constants/line_spacing = 6
+theme_override_fonts/font = SubResource("SystemFont_serif")
+theme_override_font_sizes/font_size = 23
+text = "The telephone rattles on the desk. Somewhere beyond the static, someone is waiting."
+autowrap_mode = 3
+vertical_alignment = 1
+
+[node name="Note" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.59, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 11
+text = "REPRIMANDS  0 / 3"
+
+[node name="AnswerRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="AnswerButton" type="Button" parent="Root/Center/Panel/Margin/VBox/AnswerRow"]
+custom_minimum_size = Vector2(196, 52)
+layout_mode = 2
+focus_neighbor_top = NodePath(".")
+theme_override_colors/font_color = Color(1, 0.9, 0.68, 1)
+theme_override_colors/font_hover_color = Color(1, 0.97, 0.86, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.84, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_answer_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_answer_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_answer_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Answer"
+
+[node name="ChoicesRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DispatchButton" type="Button" parent="Root/Center/Panel/Margin/VBox/ChoicesRow"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.88, 0.84, 0.72, 1)
+theme_override_colors/font_hover_color = Color(1, 0.92, 0.7, 1)
+theme_override_colors/font_pressed_color = Color(0.94, 0.79, 0.52, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Send Patrol"
+
+[node name="LogButton" type="Button" parent="Root/Center/Panel/Margin/VBox/ChoicesRow"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.88, 0.84, 0.72, 1)
+theme_override_colors/font_hover_color = Color(1, 0.92, 0.7, 1)
+theme_override_colors/font_pressed_color = Color(0.94, 0.79, 0.52, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Log in Journal"
+
+[node name="HangupButton" type="Button" parent="Root/Center/Panel/Margin/VBox/ChoicesRow"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.88, 0.84, 0.72, 1)
+theme_override_colors/font_hover_color = Color(1, 0.92, 0.7, 1)
+theme_override_colors/font_pressed_color = Color(0.94, 0.79, 0.52, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Hang Up"
+
+[node name="TwistRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AgreeButton" type="Button" parent="Root/Center/Panel/Margin/VBox/TwistRow"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9, 0.71, 0.55, 1)
+theme_override_colors/font_hover_color = Color(1, 0.87, 0.7, 1)
+theme_override_colors/font_pressed_color = Color(0.94, 0.72, 0.48, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Agree"
+
+[node name="RefuseButton" type="Button" parent="Root/Center/Panel/Margin/VBox/TwistRow"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86, 0.87, 0.74, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94, 0.76, 1)
+theme_override_colors/font_pressed_color = Color(0.92, 0.8, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Refuse and Send Patrol"
+
+[node name="ContinueRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+visible = false
+layout_mode = 2
+alignment = 2
+
+[node name="ContinueButton" type="Button" parent="Root/Center/Panel/Margin/VBox/ContinueRow"]
+custom_minimum_size = Vector2(196, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.86, 0.73, 1)
+theme_override_colors/font_hover_color = Color(1, 0.93, 0.73, 1)
+theme_override_colors/font_pressed_color = Color(0.95, 0.8, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_mono")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "Continue"

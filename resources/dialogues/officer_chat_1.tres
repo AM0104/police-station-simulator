@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="1_dialogue"]
+
+[resource]
+script = ExtResource("1_dialogue")
+speaker = "Officer Vetrov"
+text = "If you hear someone in the archive after midnight, it's probably the pipes. Probably."
+speaker_ru = "Офицер Ветров"
+text_ru = "Если услышишь ночью в архиве кого-то — это, скорее всего, трубы. Скорее всего."
