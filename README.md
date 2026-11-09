@@ -2,7 +2,7 @@
 
 A first-person noir police-station career prototype for **Godot 4.3** (Forward+). The player is a twenty-two-year-old clerk who starts in the archive, delivers the Chief's folders across a living station, is warned by a detective about the Kravtsov case, and earns a promotion to Duty Officer.
 
-Everything is built from Godot primitives, standard materials, procedural particles, procedural audio, and shaders. No imported models, textures, audio, or font files are required.
+The station interior is built from Godot primitives, standard materials, procedural particles, procedural audio, and shaders. The new outdoor main map uses one imported, CC-BY-licensed police-station model (credited below).
 
 ![The living police station](docs/screenshots/station_main_hall.png)
 
@@ -11,14 +11,32 @@ Everything is built from Godot primitives, standard materials, procedural partic
 1. Install **Godot 4.3** (the standard build with the **Forward+** renderer).
 2. Start Godot, click **Import**, and choose this folder's `project.godot`.
 3. Wait for the first import to finish.
-4. Press **F5**. The main scene is `res://scenes/Station.tscn`.
-5. Wait for Chief Arkady to walk up, then read the intro dialogue.
-6. Use **E** to interact, **WASD** to move, mouse to look, and **Esc** for Settings.
-7. The game starts in Russian. Switch to English from Settings if needed.
+4. Press **F5**. The main scene is `res://scenes/HawkinsStation.tscn` — the station grounds at night.
+5. Walk to the lit **POLICE** entrance and press **E** to enter the station; the existing interior story loads.
+6. Wait for Chief Arkady to walk up, then read the intro dialogue.
+7. Use **E** to interact, **WASD** to move, mouse to look, and **Esc** for Settings.
+8. The game starts in Russian. Switch to English from Settings if needed.
 
 No manual scene setup is required — all scenes and resources are included and wired together.
 
 > Compatibility note: the project is authored for Godot 4.3. The earlier Station and movement QA routes passed in **Godot 4.3.stable**; the expanded story and environment pass were re-run in 4.7.2. Older chapter prototypes remain available from their scenes.
+
+## Station grounds (main map)
+
+**F5 now starts outside the Hawkins police station.** The imported building sits in the middle of a decorated night-time lot: parking bays, two police cruisers and civilian cars, a perimeter fence with gate pillars, sodium street lamps, trees and hedges, entrance planters, benches, bins, a hydrant, a newspaper box, a flagpole, a lit doorway and a department monument sign.
+
+The Sketchfab model is an exterior shell with no interior rooms or colliders, so it is used as the station's outside. The bright front door is an E interactable that fades into the untouched interior story (`scenes/Station.tscn`); the original prototype can still be opened directly with **F6**.
+
+![The station grounds at night](docs/screenshots/hawkins_grounds.png)
+
+![The lit POLICE entrance](docs/screenshots/hawkins_entrance.png)
+
+- Scene: `scenes/HawkinsStation.tscn`
+- Controller and HUD: `scripts/hawkins_station.gd`
+- Door interaction proxy: `scripts/hawkins_entrance.gd`
+- Runtime star field: `scripts/hawkins_stars.gd`
+- Rebuild the decorated grounds: `godot --headless --path . --script res://tools/build_hawkins_map.gd`
+- Model credit: **“Hawkins Police Station”** by **Sea Land Air** (Sketchfab), **CC-BY-4.0** — see `assets/models/hawkins_police_station/ATTRIBUTION.md`.
 
 ## Police Station prototype (main)
 

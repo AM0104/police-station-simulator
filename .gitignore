@@ -11,6 +11,7 @@
 .tools/
 .station_build/
 .station_qa/
+.tmp_check/
 LocalLow/
 export_templates/
 feature_profiles/
@@ -20,4 +21,5 @@ text_editor_themes/
 # Local backup archive, not part of the source tree.
 Archive_First_Day_Godot43.zip
 
-docs/screenshots/*.import
+# Godot import sidecars are regenerated on first import.
+*.import
